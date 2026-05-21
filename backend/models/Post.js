@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   authorId: {
@@ -63,5 +63,5 @@ const postSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
-export default Post;
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;

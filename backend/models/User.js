@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   uid: {
@@ -95,5 +95,5 @@ userSchema.methods.comparePassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.passwordHash);
 };
 
-const User = mongoose.models.User || mongoose.model('User', userSchema);
-export default User;
+const User = mongoose.model('User', userSchema);
+module.exports = User;
