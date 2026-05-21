@@ -10,16 +10,13 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { PrismaClient } from '@prisma/client';
 import { handleRegisterValidation, handleMessageValidation } from './src/validation/socketValidation.js';
+import mongoose from 'mongoose';
+import Post from './backend/models/Post.js';
+import User from './backend/models/User.js';
+import Conversation from './backend/models/Conversation.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const mongoose = require('mongoose');
-const Post = require('./backend/models/Post');
-const User = require('./backend/models/User');
-const Conversation = require('./backend/models/Conversation');
 
 function loadEnvFile() {
   const envPath = path.join(__dirname, '.env');
