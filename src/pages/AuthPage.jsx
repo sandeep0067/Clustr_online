@@ -224,7 +224,7 @@ export default function AuthPage({ onBack, onContinue }) {
               onClick={onBack}
               className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm text-neutral-300 transition hover:border-lime-400/40 hover:text-white"
             >
-              Back to Dashboard
+              Back to Clustr
             </button>
 
             <p className="mt-10 text-sm uppercase tracking-[0.35em] text-lime-400">Clustr access</p>

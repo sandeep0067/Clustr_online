@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import LandingPage from '../SkillSwap/src/App.jsx';
 import SkillNetApp from './App.jsx';
 
 export default function Root() {

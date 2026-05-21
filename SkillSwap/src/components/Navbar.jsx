@@ -138,7 +138,7 @@ export default function Navbar({ onLogin, onLogout, user, authReady }) {
         )}
 
         <button
-          onClick={user ? onLogout : () => scrollToId("section-cta")}
+          onClick={user ? onLogout : onLogin}
           className="flex items-center gap-2 text-[13.5px] font-semibold text-black bg-lime-400 hover:bg-lime-300 px-5 py-2.5 rounded-full transition-all duration-200 hover:scale-[1.03] active:scale-[0.97] shadow-[0_0_20px_rgba(163,230,53,0.2)] hover:shadow-[0_0_28px_rgba(163,230,53,0.35)]"
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
@@ -211,7 +211,7 @@ export default function Navbar({ onLogin, onLogout, user, authReady }) {
                 if (user) {
                   onLogout?.();
                 } else {
-                  scrollToId("section-cta");
+                  onLogin?.();
                 }
                 setMenuOpen(false);
               }}

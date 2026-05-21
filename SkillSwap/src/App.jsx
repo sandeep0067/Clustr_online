@@ -22,7 +22,7 @@ const SECTIONS = [
 
 export default function App() {
   const clustrAuthUrl =
-    import.meta.env.VITE_CLUSTR_URL?.replace(/\/$/, "")?.concat("/auth") || "http://localhost:5174/auth";
+    import.meta.env.VITE_CLUSTR_URL?.replace(/\/$/, "")?.concat("/auth") || "/auth";
   const [showBottomNav, setShowBottomNav] = useState(false);
   const [activeSection, setActiveSection] = useState("section-hero");
   const [authUser, setAuthUser] = useState(null);
@@ -105,9 +105,9 @@ export default function App() {
           onLogout={handleLogout}
         />
         <Hero />
-        <Learn />
+        <Learn onStart={handleOpenAuth} />
         <GlobalLearners />
-        <OurMission />
+        <OurMission onStart={handleOpenAuth} />
         <Footer />
       </div>
 

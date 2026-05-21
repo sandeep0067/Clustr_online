@@ -4,6 +4,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.{js,jsx,ts,tsx}',
+    './SkillSwap/src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {},
