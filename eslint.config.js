@@ -8,6 +8,10 @@ export default defineConfig([
   globalIgnores([
     'dist',
     'node_modules',
+    'backend/node_modules_bak',
+    'backend/node_modules_unused',
+    'SkillSwap/dist',
+    'SkillSwap/node_modules',
     '**/dist*.{js,jsx}',
   ]),
   js.configs.recommended,
@@ -29,7 +33,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['server.js', 'backend/**/*.js'],
+    files: ['server.js', 'express-demo.js', 'test-*.js', 'test-*.cjs', 'scratch/**/*.js', 'backend/**/*.js', 'src/fileHandling/**/*.js'],
     languageOptions: {
       globals: globals.node,
     },

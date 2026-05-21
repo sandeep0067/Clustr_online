@@ -16,6 +16,8 @@ uploads/*
 !uploads/.gitkeep
 backend/node_modules_bak
 backend/node_modules_unused
+SkillSwap/node_modules
+SkillSwap/dist
 server-*.log
 
 # Editor directories and files

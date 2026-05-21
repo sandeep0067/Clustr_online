@@ -75,7 +75,7 @@ export default function LandingPage() {
         {}
         <section id="section-hero" className="min-h-[75vh] sm:min-h-[80vh] flex items-center justify-center px-4 sm:px-6 text-center">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Welcome to Clustr</h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Welcome to SkillSwap</h1>
             <p className="text-base sm:text-lg md:text-xl text-neutral-300 mb-8">
               Learn from others, teach what you know. Connect with skill-sharers around the world.
             </p>
@@ -123,7 +123,7 @@ export default function LandingPage() {
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
             <p className="text-neutral-300 mb-8">
-              We believe that knowledge should be accessible to everyone. Clustr empowers individuals to learn and teach, creating a more connected and skilled global community.
+              We believe that knowledge should be accessible to everyone. SkillSwap empowers individuals to learn and teach, creating a more connected and skilled global community.
             </p>
           </div>
         </section>
@@ -133,7 +133,7 @@ export default function LandingPage() {
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start?</h2>
             <p className="text-neutral-300 mb-10">
-              Join thousands of learners and teachers already sharing skills on Clustr.
+              Join thousands of learners and teachers already sharing skills on SkillSwap.
             </p>
             <button
               onClick={() => navigate("/app")}
@@ -146,7 +146,7 @@ export default function LandingPage() {
 
         {}
         <footer className="border-t border-white/10 py-12 px-4 sm:px-6 text-center text-neutral-400 text-sm">
-          <p>&copy; 2024 Clustr. All rights reserved.</p>
+          <p>&copy; 2024 SkillSwap. All rights reserved.</p>
         </footer>
       </div>
 
