@@ -100,8 +100,7 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      id="section-cta"
+    <footer 
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{ 

@@ -16,7 +16,7 @@ function useInView(threshold = 0.2) {
   return [ref, inView];
 }
 
-export default function OurMission({ onStart }) {
+export default function OurMission() {
   const [sectionRef, inView] = useInView(0.15);
   const [imageRef, imageInView] = useInView(0.2);
 
@@ -188,7 +188,7 @@ export default function OurMission({ onStart }) {
                 transition: "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s",
               }}
             >
-              <button onClick={onStart} className="group inline-flex items-center gap-3 px-6 sm:px-10 py-4 rounded-full bg-gradient-to-r from-lime-400 to-cyan-400 text-black font-bold text-[15px] sm:text-[16px] hover:from-lime-300 hover:to-cyan-300 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] shadow-[0_8px_32px_rgba(163,230,53,0.3)] hover:shadow-[0_12px_40px_rgba(163,230,53,0.4)]">
+              <button className="group inline-flex items-center gap-3 px-6 sm:px-10 py-4 rounded-full bg-gradient-to-r from-lime-400 to-cyan-400 text-black font-bold text-[15px] sm:text-[16px] hover:from-lime-300 hover:to-cyan-300 transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] shadow-[0_8px_32px_rgba(163,230,53,0.3)] hover:shadow-[0_12px_40px_rgba(163,230,53,0.4)]">
                 <span>Start swapping skills</span>
                 <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />

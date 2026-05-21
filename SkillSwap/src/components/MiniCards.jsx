@@ -1,21 +1,18 @@
 import { useState } from "react";
-import learnerImage from "../../pngwing.com.png";
-import groupImage from "../../pngwing.com (1).png";
-import logoImage from "../../public/Logo.jpg";
 
 const CARDS = [
   {
-    src: groupImage,
+    src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80",
     label: "Design",
     color: "text-lime-400",
   },
   {
-    src: learnerImage,
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80",
     label: "Coding",
     color: "text-violet-400",
   },
   {
-    src: logoImage,
+    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&q=80",
     label: "Marketing",
     color: "text-cyan-400",
   },

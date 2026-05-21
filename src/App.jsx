@@ -389,7 +389,7 @@ function ClustrLoader() {
 export default function SkillNet() {
   const navigate = useNavigate();
   const location = useLocation();
-  const skillSwapUrl = import.meta.env.VITE_SKILLSWAP_URL?.replace(/\/$/, '') || '/';
+  const skillSwapUrl = import.meta.env.VITE_SKILLSWAP_URL?.replace(/\/$/, '') || 'http://localhost:5173';
   const transferParams = new URLSearchParams(location.search);
   const transferredProfileName = transferParams.get('profileName')?.trim() || '';
   const routeProfileId = location.pathname.startsWith('/profile/')

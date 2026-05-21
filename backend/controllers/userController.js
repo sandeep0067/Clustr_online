@@ -92,7 +92,10 @@ exports.getUserProfile = async (req, res, next) => {
 exports.updateUserProfile = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const updates = req.body || {};
+    if (req.file) {
+      updates.profilePic = `/uploads/${req.file.filename}`;
+    }
 
     const user = await User.findOneAndUpdate({ uid: id }, updates, { new: true });
     if (!user) {

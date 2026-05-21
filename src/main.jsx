@@ -2,7 +2,7 @@ import React, { StrictMode, Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
-import Root from './Root.jsx'
+import App from './App.jsx'
 
 class AppErrorBoundary extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AppErrorBoundary>
       <BrowserRouter>
-        <Root />
+        <App />
       </BrowserRouter>
     </AppErrorBoundary>
   </StrictMode>,

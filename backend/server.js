@@ -52,6 +52,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 connectDB();
 
 const userRoutes = require('./routes/userRoutes');

@@ -10,11 +10,11 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { PrismaClient } from '@prisma/client';
 import { handleRegisterValidation, handleMessageValidation } from './src/validation/socketValidation.js';
-import { createRequire } from 'module';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const mongoose = require('mongoose');
 const Post = require('./backend/models/Post');
@@ -44,11 +44,7 @@ loadEnvFile();
 
 const prisma = new PrismaClient();
 
-const MONGO_URI = process.env.MONGO_URI;
-if (!MONGO_URI) {
-  console.error('MONGO_URI is required. Add it to .env locally and as an environment variable on Render.');
-  process.exit(1);
-}
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://Naman:2410990736@ac-ajfrbqf-shard-00-00.ut9zkta.mongodb.net:27017,ac-ajfrbqf-shard-00-01.ut9zkta.mongodb.net:27017,ac-ajfrbqf-shard-00-02.ut9zkta.mongodb.net:27017/clustrDB?ssl=true&replicaSet=atlas-hgb2d5-shard-0&authSource=admin&retryWrites=true&w=majority';
 const MASKED_URI = MONGO_URI.replace(/:([^@]+)@/, ':****@');
 console.log(`Attempting to connect to MongoDB: ${MASKED_URI}`);
 mongoose.connection.on('disconnected', () => {
@@ -73,7 +69,6 @@ try {
 const app = express();
 const server = http.createServer(app);
 const uploadsDirectory = path.join(__dirname, 'uploads');
-const distDirectory = path.join(__dirname, 'dist');
 const mediaUploadLimitBytes = 25 * 1024 * 1024;
 const allowedOrigins = new Set([
   'http://localhost:5173',
@@ -84,10 +79,6 @@ const allowedOrigins = new Set([
   'http://127.0.0.1:5174',
   'http://127.0.0.1:5175',
   'http://127.0.0.1:3000',
-  ...(process.env.CLIENT_ORIGIN || '')
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter(Boolean),
 ]);
 const cookieOptions = {
   httpOnly: true,
@@ -96,8 +87,6 @@ const cookieOptions = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: '/',
 };
-
-app.set('trust proxy', 1);
 
 if (!fs.existsSync(uploadsDirectory)) {
   fs.mkdirSync(uploadsDirectory, { recursive: true });
@@ -159,6 +148,15 @@ const postMediaUpload = multer({
 
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
+
+// Friendly handler for malformed JSON requests (body-parser SyntaxError)
+app.use((err, req, res, next) => {
+  if (err && err.type === 'entity.parse.failed') {
+    console.error('Malformed JSON in request:', err.message);
+    return res.status(400).json({ success: false, message: 'Invalid JSON payload' });
+  }
+  return next(err);
+});
 app.use(cookieParser());
 app.use('/uploads', express.static(uploadsDirectory));
 app.use((req, res, next) => {
@@ -315,8 +313,9 @@ const handleSignup = async (req, res) => {
     setAuthCookie(res, token);
     res.status(201).json({ success: true, user: toPublicUser(user), token });
   } catch (error) {
-    console.error('Signup failed:', error);
-    res.status(500).json({ success: false, message: 'Failed to create account' });
+    console.error('Signup failed:', error && error.stack ? error.stack : error);
+    console.error('Signup request body:', req.body);
+    res.status(500).json({ success: false, message: error?.message || 'Failed to create account' });
   }
 };
 
@@ -333,8 +332,9 @@ const handleLogin = async (req, res) => {
     setAuthCookie(res, token);
     res.json({ success: true, user: toPublicUser(user), token });
   } catch (error) {
-    console.error('Login failed:', error);
-    res.status(500).json({ success: false, message: 'Failed to log in' });
+    console.error('Login failed:', error && error.stack ? error.stack : error);
+    console.error('Login request body:', req.body);
+    res.status(500).json({ success: false, message: error?.message || 'Failed to log in' });
   }
 };
 
@@ -598,6 +598,18 @@ app.delete('/api/posts/:id', protect, async (req, res) => {
   }
 });
 
+const distDirectory = path.join(__dirname, 'dist');
+if (fs.existsSync(distDirectory)) {
+  app.use(express.static(distDirectory));
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api') && !req.path.startsWith('/socket.io')) {
+      res.sendFile(path.join(distDirectory, 'index.html'));
+      return;
+    }
+    next();
+  });
+}
+
 const getThreadId = (userA, userB) => [userA, userB].sort().join('__');
 
 io.on('connection', (socket) => {
@@ -707,17 +719,6 @@ app.get('/health', (_req, res) => {
     postStorage: 'mongodb',
   });
 });
-
-if (fs.existsSync(distDirectory)) {
-  app.use(express.static(distDirectory));
-  app.get(/.*/, (req, res, next) => {
-    if (req.path.startsWith('/api/') || req.path.startsWith('/uploads/')) {
-      return next();
-    }
-
-    return res.sendFile(path.join(distDirectory, 'index.html'));
-  });
-}
 
 const PORT = parseInt(process.env.PORT || '5000', 10);
 

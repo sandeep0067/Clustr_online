@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import learnerImage from "../../pngwing.com.png";
 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -83,7 +82,7 @@ function ProgressBar({ label, pct, color, delay, inView }) {
   );
 }
 
-export default function Learn({ onStart }) {
+export default function Learn() {
   const [sectionRef, inView] = useInView(0.15);
 
   return (
@@ -180,7 +179,6 @@ export default function Learn({ onStart }) {
             </div>
 
             <button
-              onClick={onStart}
               className="flex items-center gap-2 bg-lime-400 hover:bg-lime-300 text-black font-bold text-sm px-6 py-3.5 rounded-full transition-all duration-200 hover:scale-[1.03] active:scale-[0.97]"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
@@ -200,7 +198,7 @@ export default function Learn({ onStart }) {
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[240px] h-[360px] sm:w-[320px] sm:h-[500px] lg:w-[380px] lg:h-[580px]" style={{ zIndex: 5 }}>
               <div className="w-full h-full relative" style={{ filter: "drop-shadow(0 0 40px rgba(163,230,53,0.15))" }}>
                 <img
-                  src={learnerImage}
+                  src="/pngwing.com.png"
                   alt="Learner"
                   className="w-full h-full object-contain object-center"
                   style={{

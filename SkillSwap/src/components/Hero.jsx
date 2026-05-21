@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SearchBar from "./SearchBar";
 import MiniCards from "./MiniCards";
-import heroVideo from "../../public/mixkit-girl-doing-homework-in-a-library-4531-hd-ready.mp4";
-import heroPoster from "../../pngwing.com (1).png";
 
 function FadeUp({ children, visible, delay = 0, className = "" }) {
   return (
@@ -20,14 +18,19 @@ function FadeUp({ children, visible, delay = 0, className = "" }) {
 }
 
 export default function Hero() {
-  const [visible, setVisible] = useState(true);
-  const [underlineDrawn, setUnderline] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [underlineDrawn, setUnderline] = useState(false);
   const videoRef = useRef(null);
 
   useEffect(() => {
+    const t1 = setTimeout(() => setVisible(true), 100);
+    const t2 = setTimeout(() => setUnderline(true), 850);
     videoRef.current?.play().catch(() => {});
 
-    return undefined;
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
 
   return (
@@ -50,9 +53,8 @@ export default function Hero() {
               muted
               loop
               playsInline
-              poster={heroPoster}
             >
-              <source src={heroVideo} type="video/mp4" />
+              <source src="https://assets.mixkit.co/active_storage/video_items/100455/1724284388/100455-video-720.mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:bottom-5 sm:left-5 flex items-center justify-center sm:justify-start gap-2 bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-4 py-2">

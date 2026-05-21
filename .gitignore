@@ -6,19 +6,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.env
+.env.*
+!.env.example
 
 node_modules
+node_modules_*
 dist
 dist-ssr
 *.local
-.env
-uploads/*
-!uploads/.gitkeep
-backend/node_modules_bak
-backend/node_modules_unused
-SkillSwap/node_modules
-SkillSwap/dist
-server-*.log
 
 # Editor directories and files
 .vscode/*
@@ -32,3 +28,7 @@ server-*.log
 *.sw?
 
 /src/generated/prisma
+
+# uploaded files
+/uploads
+/backend/uploads

@@ -4,9 +4,10 @@ const Post = require('../models/Post');
 exports.createPost = async (req, res) => {
   try {
     const { userId, content, mediaUrl, skillTags } = req.body;
+    const finalMediaUrl = req.file ? `/uploads/${req.file.filename}` : mediaUrl;
 
     const newPost = await dualStorageService.savePost({
-      userId, content, mediaUrl, skillTags
+      userId, content, mediaUrl: finalMediaUrl, skillTags
     });
 
     res.status(201).json({ message: 'Post created successfully', post: newPost });
